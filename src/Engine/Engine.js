@@ -1,7 +1,6 @@
 const Register = require("./Register");
 const Instruction = require("./Instruction");
 const CRS = require("./CRS");
-const RSType = require("./enums").RSType;
 const Bus = require("./Bus");
 
 class Engine {
@@ -98,7 +97,7 @@ class Engine {
     for (let i = 0; i < 32; i++) {
       let newReg;
       newReg = new Register(`R${i}`, 0);
-      if (i === 2 || i === 3) newReg = new Register(`R${i}`, i);
+      // if (i === 2 || i === 3) newReg = new Register(`R${i}`, i);
 
       Engine.bus.scubscribe(newReg);
       Engine.RegisterFile.push(newReg);

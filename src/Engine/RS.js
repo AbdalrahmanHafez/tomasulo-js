@@ -47,7 +47,7 @@ class RS {
     }
     if (instruction.op !== "ST") instruction.rd.q = this.tag; // l1 , M2, S3, A2
 
-    console.log("issing ", instruction);
+    console.log(`\tIssing ${instruction.op} ${instruction.rd.name}`);
   }
 
   excuteIfCan() {
@@ -78,11 +78,10 @@ class RS {
             this.result = Engine.memory.get(this.v1);
             if (this.result === undefined) this.result = 0;
             break;
-          case "ST":
-            Engine.memory.set(this.v1, this.v2);
-            break;
+          // case "ST":
+          //   Engine.memory.set(this.v1, this.v2);
+          //   break;
           default:
-            console.log("Somthing is Wrong");
             break;
         }
       }
@@ -95,8 +94,9 @@ class RS {
   wbIfCan() {
     const Engine = require("./Engine.js");
     if (this.instruction.willWriteBack)
-      if (this.instruction.op !== "ST")
-        Engine.bus.notify(this.tag, this.result);
+      if (this.instruction.op === "ST") {
+        Engine.memory.set(this.v1, this.v2);
+      } else Engine.bus.notify(this.tag, this.result);
   }
 
   reciveData(tag, data) {
