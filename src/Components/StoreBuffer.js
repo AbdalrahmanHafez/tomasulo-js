@@ -17,9 +17,9 @@ const StoreBuffer = () => {
             <tr>
               <th>Tag</th>
               <th>Op</th>
+              <th>Address</th>
               <th>v</th>
               <th>q</th>
-              <th>Address</th>
               <th>Busy</th>
               <th>Remining</th>
             </tr>
@@ -31,7 +31,7 @@ const StoreBuffer = () => {
                 <td>{rs.op}</td> 
                 <td>{rs.v1}</td>
                 <td>{rs.v2}</td>
-                <td>{rs.q1}</td>
+                <td>{rs.q2}</td>
                 <td>{rs.veryBusy}</td>
                  <td>{rs.execTime}</td>
               </tr>
