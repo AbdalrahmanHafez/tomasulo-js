@@ -48,20 +48,19 @@ class Engine {
       const latency = latencies[op];
       const rd = this.findRegister(rv1);
       let rs, rt;
-      if (op === "LD" || op === "ST") {
-        rs = rv2.match(/[0-9]+/)[0];
-        return new Instruction(op, rd, rs, null, latency);
-      }
-      if (op === "ADD" || op === "SUB" || op === "MUL") {
-        const parseValue = (v) => {
-          if (v.match(/R[0-9]+/)) return this.findRegister(v);
-          else if (v.match(/[0-9]+/)) return parseInt(v);
-          else console.log(`invalid instruction ${inst}`);
-        };
-        rs = parseValue(rv2); // can either be a Register or a number
-        rt = parseValue(rv3);
-        return new Instruction(op, rd, rs, rt, latency);
-      }
+      // if (op === "LD" || op === "ST") {
+      //   rs = rv2.match(/[0-9]+/)[0];
+      //   return new Instruction(op, rd, rs, null, latency);
+      // }
+      const parseValue = (v) => {
+        if (!v) return null;
+        if (v.match(/R[0-9]+/)) return this.findRegister(v);
+        else if (v.match(/[0-9]+/)) return parseInt(v);
+        else console.log(`invalid instruction ${inst}`);
+      };
+      rs = parseValue(rv2); // can either be a Register or a number
+      rt = parseValue(rv3);
+      return new Instruction(op, rd, rs, rt, latency);
     });
   }
   static nextTick() {

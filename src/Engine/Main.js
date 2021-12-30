@@ -8,11 +8,11 @@ const latencies = {
   ST: 2,
 };
 const rawInstructions = [
-  "ADD R1, 1, 2", // not mips
-  "MUL R2, R1, 3", // supported ???
+  "ADD R11, R22, R10",
+  "MUL R2, R1, R3",
   "SUB R3, R2, R1",
-  "LD R4, 3(R1)", //   "LD R4, 3",
-  "ST R5, 4(R2)", //  "ST R5, 4",
+  "LD R30, 30",
+  "ST R5, 4",
 ];
 
 let newEngine = new Engine();

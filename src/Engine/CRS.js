@@ -1,4 +1,5 @@
 const RS = require("./RS.js");
+
 class CRS {
   constructor(type, count) {
     this.type = type;
