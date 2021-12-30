@@ -85,18 +85,19 @@ class RS {
             console.log("Somthing is Wrong");
             break;
         }
-      } else if (this.instruction.willWriteBack)
-        if (this.instruction.op !== "ST")
-          Engine.bus.notify(this.tag, this.result);
+      }
+      //  else if (this.instruction.willWriteBack)
+      //   if (this.instruction.op !== "ST")
+      //     Engine.bus.notify(this.tag, this.result);
     }
   }
 
-  // wbIfCan() {
-  //   const Engine = require("./Engine.js");
-  //   if (this.instruction.willWriteBack) {
-  //     Engine.bus.notify(this.tag);
-  //   }
-  // }
+  wbIfCan() {
+    const Engine = require("./Engine.js");
+    if (this.instruction.willWriteBack)
+      if (this.instruction.op !== "ST")
+        Engine.bus.notify(this.tag, this.result);
+  }
 
   reciveData(tag, data) {
     if (tag === this.q1) {

@@ -64,9 +64,9 @@ class Engine {
       Engine.allStations[key].excuteWhoCan();
     }
 
-    // for (const key in Engine.allStations) {
-    //   Engine.allStations[key].wbWhoCan();
-    // }
+    for (const key in Engine.allStations) {
+      Engine.allStations[key].wbWhoCan();
+    }
 
     // Issue
 

@@ -30,6 +30,15 @@ class CRS {
       }
     });
   }
+
+  wbWhoCan() {
+    this.stations.forEach((station) => {
+      if (station.busy) {
+        station.wbIfCan();
+      }
+    });
+  }
+
   empty() {
     return this.stations.filter((station) => station.busy).length === 0;
   }
