@@ -7,6 +7,10 @@ class Instruction {
     this.execTime = execTime;
     this.executing = false;
   }
+
+  execute() {
+    this.execTime--;
+  }
 }
 
 module.exports = Instruction;

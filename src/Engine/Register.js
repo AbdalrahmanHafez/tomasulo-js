@@ -2,6 +2,7 @@ class Register {
   constructor(name, value) {
     this.name = name;
     this.value = value;
+    this.q = 0;
   }
   get value() {
     return this._value;
