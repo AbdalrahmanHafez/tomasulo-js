@@ -10,6 +10,15 @@ class Instruction {
 
   execute() {
     this.execTime--;
+    const Engine = require("./Engine");
+    if (this.execTime === 0) {
+      this.executing = false;
+      this.fininshTime = Engine.cycles;
+      console.log("fished");
+    } else if (this.execTime === -1) {
+      this.willRemove = true;
+      this.willWriteBack = true;
+    }
   }
 }
 

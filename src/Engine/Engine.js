@@ -1,25 +1,12 @@
-/**
-   * Bus: every rs should subscribe 
-   * CRS:
-   *  array of RSs
-   * RS:
-   *    willRemove, willWB
-   * Instruction:
-   * 
-   * 
-   * parse the raw instructions
-   * 
-  
-	
-   */
-
 const Register = require("./Register");
 const Instruction = require("./Instruction");
 const CRS = require("./CRS");
 const RSType = require("./enums").RSType;
+const Bus = require("./Bus");
 
 class Engine {
   static instructionQueue = [];
+  static issuedInstuctions = [];
   static RegisterFile = [
     // new Register("R0", 0),
     // new Register("R1", 0),
@@ -29,6 +16,9 @@ class Engine {
   ];
   static cycles = 1;
   static allStations;
+  static bus = new Bus();
+  static memory = new Map();
+  static stillExcuting = false;
 
   static findRegister(tag) {
     return Engine.RegisterFile.find((r) => r.name === tag);
@@ -48,16 +38,14 @@ class Engine {
       const latency = latencies[op];
       const rd = this.findRegister(rv1);
       let rs, rt;
-      // if (op === "LD" || op === "ST") {
-      //   rs = rv2.match(/[0-9]+/)[0];
-      //   return new Instruction(op, rd, rs, null, latency);
-      // }
+
       const parseValue = (v) => {
         if (!v) return null;
         if (v.match(/R[0-9]+/)) return this.findRegister(v);
         else if (v.match(/[0-9]+/)) return parseInt(v);
         else console.log(`invalid instruction ${inst}`);
       };
+
       rs = parseValue(rv2); // can either be a Register or a number
       rt = parseValue(rv3);
       return new Instruction(op, rd, rs, rt, latency);
@@ -69,7 +57,24 @@ class Engine {
     // issue to reservation station
     // updates for next cycle: who isExcuting next,
 
-    let nextInstruction = Engine.instructionQueue.shift();
+    // remove who willRemove
+
+    // for each CRS excute who can execute
+    for (const key in Engine.allStations) {
+      Engine.allStations[key].excuteWhoCan();
+    }
+
+    // for (const key in Engine.allStations) {
+    //   Engine.allStations[key].wbWhoCan();
+    // }
+
+    // Issue
+
+    let nextInstruction = Engine.instructionQueue[0];
+
+    // if no more instruction
+    if (nextInstruction === undefined) return;
+
     const op = nextInstruction.op;
     let crs = undefined;
     if (op === "SUB") crs = Engine.allStations.ADD;
@@ -78,13 +83,26 @@ class Engine {
 
     if (crs.canIssue()) {
       crs.issue(nextInstruction);
+      Engine.issuedInstuctions.push(nextInstruction);
+      Engine.instructionQueue.shift();
     }
+
+    // for each CRS write back, who willWriteBack
+    // Object.keys(Engine.allStations).forEach((crs) => {
+    //   crs.wbWhoWill();
+    // });
   }
 
   run(rawInstructions, latencies) {
     // generate the registers
-    for (let i = 0; i < 32; i++)
-      Engine.RegisterFile.push(new Register(`R${i}`, 0));
+    for (let i = 0; i < 32; i++) {
+      let newReg;
+      newReg = new Register(`R${i}`, 0);
+      if (i === 2 || i === 3) newReg = new Register(`R${i}`, i);
+
+      Engine.bus.scubscribe(newReg);
+      Engine.RegisterFile.push(newReg);
+    }
 
     // map of instruction name and execTime
     Engine.parse(rawInstructions, latencies);
@@ -102,7 +120,12 @@ class Engine {
 
       console.log(`cycle # ${Engine.cycles}`);
       Engine.cycles++;
-    } while (Engine.instructionQueue.length > 0);
+
+      Engine.stillExcuting = false;
+      for (const key in Engine.allStations) {
+        Engine.stillExcuting |= !Engine.allStations[key].empty();
+      }
+    } while (Engine.stillExcuting);
   }
 }
 

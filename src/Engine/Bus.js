@@ -3,7 +3,7 @@ class Bus {
     this.listeners = [];
   }
   scubscribe(who) {
-    this.listeners += who;
+    this.listeners.push(who);
   }
   notify(tag, data) {
     this.listeners.forEach((listener) => listener.reciveData(tag, data));
