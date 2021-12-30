@@ -9,13 +9,11 @@ class Instruction {
     this.cycleIssued = undefined;
     this.cycleStarted = undefined;
     this.cycleWb = undefined;
-    //   if(this.op==="LD" || this.op==="ST"){
-    //     this.String = `${this.op} ${this.rd.name}, ${this.rs.name}`;
-    //   }
-    //   else{
-    //   this.String = `${this.op} ${this.rd.name}, ${this.rs.name}, ${this.rt.name}`;
-    // }
-    this.String = `${this.op} ${this.rd?.name}, ${this.rs?.name}, ${this.rt?.name}`;
+    if (this.op === "LD" || this.op === "ST") {
+      this.String = `${this.op} ${this.rd.name}, ${this.rs}`;
+    } else {
+      this.String = `${this.op} ${this.rd.name}, ${this.rs.name}, ${this.rt.name}`;
+    }
   }
 
   execute() {

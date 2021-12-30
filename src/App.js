@@ -14,34 +14,15 @@ import Memory from "./Components/Memory";
 function App() {
   const newEngine = useRef(undefined);
   const [, forceRerender] = useState();
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    // const latencies = {
-    //   ADD: 4,
-    //   SUB: 2,
-    //   MUL: 6,
-    //   DIV: 4,
-    //   LD: 1,
-    //   ST: 2,
-    // };
-    // const rawInstructions = [
-    //   "LD R1, 3",
-    //   "MUL R3, R1, R2",
-    //   "ADD R5, R3, R4",
-    //   "ADD R7, R2, R6",
-    //   "ADD R10, R8, R9",
-    //   "MUL R11, R7, R10",
-    //   "ADD R5, R5, R11",
-    // ];
-    // newEngine.current = new Engine();
-    // newEngine.current.reactInitalize(rawInstructions, latencies);
-
-    // forceRerender({});
     let txtInst = document.getElementById("instructions");
     txtInst.textContent =
       "LD R1, 3\nMUL R3, R1, R2\nADD R5, R3, R4\nADD R7, R2, R6\nADD R10, R8, R9\nMUL R11, R7, R10\nADD R5, R5, R11";
     txtInst.focus();
   }, []);
+
   const handleClick = () => {
     console.log("click, ", Engine.cycles);
     let stillExcuting = newEngine.current.reactTick();
@@ -101,8 +82,9 @@ function App() {
 
     newEngine.current = new Engine();
     newEngine.current.reactInitalize(rawInstructions, latencies);
-
     forceRerender({});
+
+    setIsRunning(true);
   };
 
   if (!Engine.instructionQueue) return <div>Loading</div>;
@@ -166,11 +148,19 @@ function App() {
       <div className="text-center">
         <br />
 
-        <button className="btn btn-primary btn-lg" onClick={handleStart}>
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={handleStart}
+          disabled={isRunning}
+        >
           Start
         </button>
 
-        <button className="btn btn-primary btn-lg" onClick={handleClick}>
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={handleClick}
+          disabled={!isRunning}
+        >
           Next Cycle
         </button>
         <br />
