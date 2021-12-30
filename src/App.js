@@ -1,7 +1,11 @@
+import react, { useRef, useEffect, useState } from "react";
 import Engine from "./Engine/Engine.js";
-
+import InstructionQueue from "./Components/InstructionQueue.js";
 function App() {
-  const handleClick = () => {
+  const newEngine = useRef(undefined);
+  const [, forceRerender] = useState();
+
+  useEffect(() => {
     const latencies = {
       ADD: 4,
       SUB: 2,
@@ -18,12 +22,24 @@ function App() {
       "MUL R11, R7, R10",
       "ADD R5, R5, R11",
     ];
-    console.log("click");
-    let newEngine = new Engine();
-    newEngine.run(rawInstructions, latencies);
+    newEngine.current = new Engine();
+    newEngine.current.reactInitalize(rawInstructions, latencies);
+
+    forceRerender({});
+  }, []);
+  const handleClick = () => {
+    console.log("click, ", Engine.cycles);
+    let stillExcuting = newEngine.current.reactTick();
+    if (!stillExcuting) {
+      alert("Done");
+    }
+    forceRerender({});
   };
+
+  if (!Engine.instructionQueue) return <div>Loading</div>;
   return (
     <>
+      <InstructionQueue />
       <button onClick={handleClick}>Next Cycle</button>
     </>
   );

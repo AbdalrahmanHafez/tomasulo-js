@@ -4,6 +4,7 @@ const CRS = require("./CRS");
 const Bus = require("./Bus");
 
 class Engine {
+  static rawInstructions = [];
   static instructionQueue = [];
   static issuedInstuctions = [];
   static RegisterFile = [
@@ -28,6 +29,7 @@ class Engine {
     // "SUB R3, R2, R1",
     // "LD R4, 3(R1)",
     // "ST R5, 4(R2)",
+    Engine.rawInstructions = rawInstructions;
     Engine.instructionQueue = rawInstructions.map((inst) => {
       const [op, rv1, rv2, rv3] = inst
         .replace(/,/g, "")
@@ -81,6 +83,7 @@ class Engine {
     else crs = Engine.allStations[op];
 
     if (crs.canIssue()) {
+      nextInstruction.cycleIssued = Engine.cycles;
       crs.issue(nextInstruction);
       Engine.issuedInstuctions.push(nextInstruction);
       Engine.instructionQueue.shift();
@@ -90,6 +93,41 @@ class Engine {
     // Object.keys(Engine.allStations).forEach((crs) => {
     //   crs.wbWhoWill();
     // });
+  }
+
+  reactInitalize(rawInstructions, latencies) {
+    // generate the registers
+    for (let i = 0; i < 32; i++) {
+      let newReg;
+      newReg = new Register(`R${i}`, 0);
+      // if (i === 2 || i === 3) newReg = new Register(`R${i}`, i);
+
+      Engine.bus.scubscribe(newReg);
+      Engine.RegisterFile.push(newReg);
+    }
+
+    // map of instruction name and execTime
+    Engine.parse(rawInstructions, latencies);
+    // map of CRS and this count of stations
+    Engine.allStations = {
+      ADD: new CRS("ADD", 3),
+      MUL: new CRS("MUL", 3),
+      LD: new CRS("LD", 3),
+      ST: new CRS("ST", 3),
+    };
+  }
+  reactTick() {
+    // tick
+    Engine.nextTick(); // excutes, write back, issue to reservation station
+
+    console.log(`cycle # ${Engine.cycles}`);
+    Engine.cycles++;
+
+    Engine.stillExcuting = false;
+    for (const key in Engine.allStations) {
+      Engine.stillExcuting |= !Engine.allStations[key].empty();
+    }
+    return Engine.stillExcuting;
   }
 
   run(rawInstructions, latencies) {

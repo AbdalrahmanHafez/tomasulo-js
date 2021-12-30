@@ -6,6 +6,10 @@ class Instruction {
     this.rt = rt;
     this.execTime = execTime;
     this.executing = false;
+    this.cycleIssued = undefined;
+    this.cycleStarted = undefined;
+    this.cycleWb = undefined;
+    this.String = `${this.op} ${this.rd.name}, ${this.rs.name}, ${this.rt.name}`;
   }
 
   execute() {
@@ -13,9 +17,10 @@ class Instruction {
     const Engine = require("./Engine");
     if (this.execTime === 0) {
       this.executing = false;
-      this.fininshTime = Engine.cycles;
+      this.cycleFinish = Engine.cycles;
       console.log(`\tFished ${this.op} ${this.rd.name}`);
     } else if (this.execTime === -1) {
+      this.cycleWb = Engine.cycles;
       this.willRemove = true;
       this.willWriteBack = true;
       console.log(`\tWill WB ${this.op} ${this.rd.name}`);

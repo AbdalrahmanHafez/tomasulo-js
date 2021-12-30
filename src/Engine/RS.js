@@ -59,6 +59,10 @@ class RS {
     // check if instruction can execute
     if (this.q1 === 0 && this.q2 === 0) {
       this.instruction.executing = true;
+      this.instruction.cycleStarted =
+        this.instruction.cycleStarted === undefined
+          ? Engine.cycles
+          : this.instruction.cycleStarted;
       this.instruction.execute();
       if (this.instruction.execTime === 0) {
         switch (this.instruction.op) {
