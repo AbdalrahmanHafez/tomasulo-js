@@ -145,6 +145,7 @@ function App() {
           </Col>
         </Row>
       </div>
+
       <div className="text-center">
         <br />
 
@@ -164,22 +165,25 @@ function App() {
           Next Cycle
         </button>
         <br />
-
-        <GlobalInfo />
       </div>
-      <br />
-      <InstructionQueue />
-      <br />
-      <CRS name={"ADD/SUB"} type={"ADD"} />
-      <br />
-      <CRS name={"MUL/DIV"} type={"MUL"} />
-      <LoadBuffer />
-      <br />
-      <StoreBuffer />
-      <br />
-      <RegisterFile />
-      <br />
-      <Memory />
+      {isRunning && (
+        <>
+          <GlobalInfo />
+          <br />
+          <InstructionQueue />
+          <br />
+          <CRS name={"ADD/SUB"} type={"ADD"} />
+          <br />
+          <CRS name={"MUL/DIV"} type={"MUL"} />
+          <LoadBuffer />
+          <br />
+          <StoreBuffer />
+          <br />
+          <RegisterFile />
+          <br />
+          <Memory />
+        </>
+      )}
     </>
   );
 }
