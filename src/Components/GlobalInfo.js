@@ -5,7 +5,7 @@ const GlobalInfo = () => {
   return (
     <>
       <h4>Cycle #{Engine.cycles}</h4>
-      <h4>statsions {JSON.stringify(Engine.allStations)}</h4>
+      {/* <h4>statsions {JSON.stringify(Engine.allStations)}</h4> */}
     </>
   );
 };

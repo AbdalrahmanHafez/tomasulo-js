@@ -4,6 +4,7 @@ import Engine from "../Engine/Engine.js";
 const RegisterFile = ({ engine }) => {
   return (
     <>
+    <h2>Register File</h2>
       <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
         <table className="table table-bordered table-striped mb-0">
           <thead>

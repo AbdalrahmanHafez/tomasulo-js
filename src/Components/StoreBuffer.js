@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Engine from "../Engine/Engine.js";
 
-const CRS = ({ type,name}) => {
+const StoreBuffer = () => {
   //console.log("stationss = ", Engine.allStations);
   if(Engine.allStations === undefined) {return(
     <h1>error</h1>
@@ -9,32 +9,29 @@ const CRS = ({ type,name}) => {
   else{
   return (
     <>
-    <h2>Reservation Station {name}</h2>
+    <h2>Store Buffer</h2>
       <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
-      {/* <h4>statsions {JSON.stringify(Engine.allStations[type].stations[0])}</h4>  */}
 
         <table className="table table-bordered table-striped mb-0">
           <thead>
             <tr>
               <th>Tag</th>
               <th>Op</th>
-              <th>V1</th>
-              <th>V2</th>
-              <th>Q1</th>
-              <th>Q2</th>
+              <th>v</th>
+              <th>q</th>
+              <th>Address</th>
               <th>Busy</th>
               <th>Remining</th>
             </tr>
           </thead>
           <tbody>
-                  {Engine.allStations[type].stations.map((rs, i) => (
+                  {Engine.allStations["ST"].stations.map((rs, i) => (
               <tr key={i}>
                 <td>{rs.tag}</td>
                 <td>{rs.op}</td> 
                 <td>{rs.v1}</td>
                 <td>{rs.v2}</td>
                 <td>{rs.q1}</td>
-                <td>{rs.q2}</td>
                 <td>{rs.veryBusy}</td>
                  <td>{rs.execTime}</td>
               </tr>
@@ -46,4 +43,4 @@ const CRS = ({ type,name}) => {
   );
 };}
 
-export default CRS;
+export default StoreBuffer;

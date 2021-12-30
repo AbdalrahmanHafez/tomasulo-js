@@ -6,6 +6,9 @@ class RS {
     this.q1 = 0; // 0 means valid, else means it's waiting for someone, his tag is in q1
     this.q2 = 0;
     this.result = null;
+    this.op=null;
+    this.execTime=null;
+    this.veryBusy="False";
   }
   constructor(tag) {
     this.tag = tag; // l0, M1, S2, A3
@@ -14,8 +17,11 @@ class RS {
   issue(instruction) {
     const Engine = require("./Engine.js");
     this.instruction = instruction;
+    this.op=instruction.op;
+    
     // todo: based on Register File, fill v1, v2, q1, q2
     this.busy = true;
+    this.veryBusy="True";
     const RegisterFile = Engine.RegisterFile;
     // instuicton has the registers from the RegisterFile
     if (Number.isInteger(instruction.rs)) {
@@ -55,6 +61,9 @@ class RS {
     // remove the will remove instructions
     if (this.instruction.willRemove) {
       this.reset();
+    }
+    if(this.instruction.execTime>-1){
+    this.execTime=this.instruction.execTime;
     }
     // check if instruction can execute
     if (this.q1 === 0 && this.q2 === 0) {

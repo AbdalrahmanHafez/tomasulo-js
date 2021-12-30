@@ -9,6 +9,7 @@ class Instruction {
     this.cycleIssued = undefined;
     this.cycleStarted = undefined;
     this.cycleWb = undefined;
+    
     this.String = `${this.op} ${this.rd.name}, ${this.rs.name}, ${this.rt.name}`;
   }
 

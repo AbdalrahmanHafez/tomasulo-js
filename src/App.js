@@ -5,6 +5,9 @@ import InstructionQueue from "./Components/InstructionQueue.js";
 import RegisterFile from "./Components/RegisterFile.js";
 import GlobalInfo from "./Components/GlobalInfo";
 import CRS from "./Components/CRS";
+import LoadBuffer from "./Components/LoadBuffer";
+import StoreBuffer from "./Components/StoreBuffer";
+import Memory from "./Components/Memory";
 
 function App() {
   const newEngine = useRef(undefined);
@@ -40,16 +43,30 @@ function App() {
     }
     forceRerender({});
   };
-
   if (!Engine.instructionQueue) return <div>Loading</div>;
   return (
     <>
-      <button onClick={handleClick}>Next Cycle</button>
+    <div  className="text-center" >
+    <br/>
+    
+      <button className="btn btn-primary btn-lg " onClick={handleClick}>Next Cycle</button>
+      <br/>
+      {/* <h2>Memory :{Engine.memory}</h2> */}
       <GlobalInfo />
-      <CRS type={"ADD"} />
-
+      </div>
+      <br/>
       <InstructionQueue />
+      <br/>
+      <CRS  name={"ADD/SUB"} type={"ADD"} />
+      <br/>
+      <CRS name={"MUL/DIV"} type={"MUL"} />
+      <LoadBuffer />
+      <br/>
+      <StoreBuffer />
+      <br/>
       <RegisterFile />
+      <br/>
+       <Memory/>  
     </>
   );
 }

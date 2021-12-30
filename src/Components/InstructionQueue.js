@@ -7,6 +7,7 @@ const InstructionQueue = ({ engine }) => {
 
   return (
     <>
+    <h2>Instruction Queue</h2>
       <table className="table">
         <thead>
           <tr>
