@@ -1,7 +1,7 @@
-const Register = require("./Register");
-const Instruction = require("./Instruction");
-const CRS = require("./CRS");
-const Bus = require("./Bus");
+import Bus from "./Bus";
+import Register from "./Register";
+import Instruction from "./Instruction";
+import CRS from "./CRS";
 
 class Engine {
   static rawInstructions = [];
@@ -166,4 +166,5 @@ class Engine {
   }
 }
 
-module.exports = Engine;
+// module.exports = Engine;
+export default Engine;

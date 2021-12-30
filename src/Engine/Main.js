@@ -1,4 +1,5 @@
-const Engine = require("./Engine");
+import Engine from "./Engine.js";
+// const Engine = require("./Engine");
 const latencies = {
   ADD: 4,
   SUB: 2,

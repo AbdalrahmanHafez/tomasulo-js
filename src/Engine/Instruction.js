@@ -1,3 +1,4 @@
+import Engine from "./Engine.js";
 class Instruction {
   constructor(op, rd, rs, rt, execTime) {
     this.op = op;
@@ -18,7 +19,6 @@ class Instruction {
 
   execute() {
     this.execTime--;
-    const Engine = require("./Engine");
     if (this.execTime === 0) {
       this.executing = false;
       this.cycleFinish = Engine.cycles;
@@ -32,4 +32,5 @@ class Instruction {
   }
 }
 
-module.exports = Instruction;
+// module.exports = Instruction;
+export default Instruction;

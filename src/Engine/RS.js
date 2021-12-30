@@ -1,3 +1,4 @@
+import Engine from "./Engine.js";
 class RS {
   reset() {
     this.busy = false;
@@ -6,22 +7,21 @@ class RS {
     this.q1 = 0; // 0 means valid, else means it's waiting for someone, his tag is in q1
     this.q2 = 0;
     this.result = null;
-    this.op=null;
-    this.execTime=null;
-    this.veryBusy="False";
+    this.op = null;
+    this.execTime = null;
+    this.veryBusy = "False";
   }
   constructor(tag) {
     this.tag = tag; // l0, M1, S2, A3
     this.reset();
   }
   issue(instruction) {
-    const Engine = require("./Engine.js");
     this.instruction = instruction;
-    this.op=instruction.op;
-    
+    this.op = instruction.op;
+
     // todo: based on Register File, fill v1, v2, q1, q2
     this.busy = true;
-    this.veryBusy="True";
+    this.veryBusy = "True";
     const RegisterFile = Engine.RegisterFile;
     // instuicton has the registers from the RegisterFile
     if (Number.isInteger(instruction.rs)) {
@@ -57,13 +57,13 @@ class RS {
   }
 
   excuteIfCan() {
-    const Engine = require("./Engine.js");
+    // const Engine = require("./Engine.js");
     // remove the will remove instructions
     if (this.instruction.willRemove) {
       this.reset();
     }
-    if(this.instruction.execTime>-1){
-    this.execTime=this.instruction.execTime;
+    if (this.instruction.execTime > -1) {
+      this.execTime = this.instruction.execTime;
     }
     // check if instruction can execute
     if (this.q1 === 0 && this.q2 === 0) {
@@ -105,7 +105,6 @@ class RS {
   }
 
   wbIfCan() {
-    const Engine = require("./Engine.js");
     if (this.instruction.willWriteBack)
       if (this.instruction.op === "ST") {
         Engine.memory.set(this.v1, this.v2);
@@ -126,4 +125,5 @@ class RS {
   // TODO: when removing the RS, clear its' values and q
 }
 
-module.exports = RS;
+// module.exports = RS;
+export default RS;

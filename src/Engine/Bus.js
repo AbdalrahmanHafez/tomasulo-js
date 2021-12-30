@@ -10,4 +10,5 @@ class Bus {
   }
 }
 
-module.exports = Bus;
+// module.exports = Bus;
+export default Bus;

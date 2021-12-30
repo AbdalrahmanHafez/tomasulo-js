@@ -1,8 +1,8 @@
-const RS = require("./RS.js");
+import Engine from "./Engine.js";
+import RS from "./RS.js";
 
 class CRS {
   constructor(type, count) {
-    const Engine = require("./Engine.js");
     const bus = Engine.bus;
     this.type = type;
     this.count = count;
@@ -46,4 +46,5 @@ class CRS {
   // then issue to that station
 }
 
-module.exports = CRS;
+// module.exports = CRS;
+export default CRS;

@@ -20,4 +20,5 @@ class Register {
   }
 }
 
-module.exports = Register;
+// module.exports = Register;
+export default Register;
