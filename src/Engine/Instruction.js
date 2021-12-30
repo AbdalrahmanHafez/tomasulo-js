@@ -14,10 +14,11 @@ class Instruction {
     if (this.execTime === 0) {
       this.executing = false;
       this.fininshTime = Engine.cycles;
-      console.log("fished");
+      console.log(`Fished ${this.op} ${this.rd.name}`);
     } else if (this.execTime === -1) {
       this.willRemove = true;
       this.willWriteBack = true;
+      console.log(`will WB ${this.op} ${this.rd.name}`);
     }
   }
 }
