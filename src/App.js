@@ -1,6 +1,11 @@
 import react, { useRef, useEffect, useState } from "react";
+import "./Styles.css";
 import Engine from "./Engine/Engine.js";
 import InstructionQueue from "./Components/InstructionQueue.js";
+import RegisterFile from "./Components/RegisterFile.js";
+import GlobalInfo from "./Components/GlobalInfo";
+import CRS from "./Components/CRS";
+
 function App() {
   const newEngine = useRef(undefined);
   const [, forceRerender] = useState();
@@ -39,8 +44,12 @@ function App() {
   if (!Engine.instructionQueue) return <div>Loading</div>;
   return (
     <>
-      <InstructionQueue />
       <button onClick={handleClick}>Next Cycle</button>
+      <GlobalInfo />
+      <CRS type={"ADD"} />
+
+      <InstructionQueue />
+      <RegisterFile />
     </>
   );
 }

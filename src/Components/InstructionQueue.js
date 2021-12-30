@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Engine from "../Engine/Engine.js";
 
 const InstructionQueue = ({ engine }) => {
@@ -5,7 +7,7 @@ const InstructionQueue = ({ engine }) => {
 
   return (
     <>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Instruction</th>
