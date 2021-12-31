@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Engine from "../Engine/Engine.js";
 
@@ -6,6 +6,7 @@ const Memory = () => {
   //console.log("stationss = ", Engine.allStations);
   const [updateMemloc, setupdateMemloc] = useState("");
   const [updateMemValue, setupdateMemValue] = useState("");
+  const [container, setcontainer] = useState([]);
   const [, forceRerender] = useState();
 
   const handleMemUpdate = () => {
@@ -51,13 +52,18 @@ const Memory = () => {
               </tr>
             </thead>
             <tbody>
-              {/* for (let [key, value] of map) */}
-              {Engine.memory.forEach((value, key) => (
-                <tr key={key}>
-                  <td>{key}</td>
-                  <td>{Engine.memory.get(key)}</td>
-                </tr>
-              ))}
+              {(() => {
+                let container = [];
+                Engine.memory.forEach((value, key) => {
+                  container.push(
+                    <tr key={key}>
+                      <td>{key}</td>
+                      <td>{value}</td>
+                    </tr>
+                  );
+                });
+                return container;
+              })()}
             </tbody>
           </table>
         </div>
