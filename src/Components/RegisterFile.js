@@ -1,11 +1,41 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
 import Engine from "../Engine/Engine.js";
 
 const RegisterFile = ({ engine }) => {
+  const [updateReg, setupdateReg] = useState("");
+  const [updateRegValue, setupdateRegValu] = useState("");
+  const [, forceRerender] = useState();
+
+  const handleRegisterUpdate = () => {
+    if (updateRegValue === "" || updateReg === "") alert("invalid input");
+    Engine.findRegister(updateReg).value = parseInt(updateRegValue);
+    forceRerender({});
+  };
   return (
     <>
-    <h2>Register File</h2>
+      <h2>Register File</h2>
       <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
+        <div style={{ float: "right" }}>
+          <input
+            placeholder="r10"
+            onChange={(e) => {
+              setupdateReg(e.target.value.toUpperCase());
+            }}
+            value={updateReg}
+          />{" "}
+          <input
+            placeholder="value"
+            onChange={(e) => {
+              setupdateRegValu(e.target.value);
+            }}
+            value={updateRegValue}
+          />{" "}
+          <button className="btn btn-primary" onClick={handleRegisterUpdate}>
+            update
+          </button>
+        </div>
+
         <table className="table table-bordered table-striped mb-0">
           <thead>
             <tr>

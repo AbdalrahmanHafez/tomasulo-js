@@ -87,6 +87,10 @@ function App() {
     setIsRunning(true);
   };
 
+  // useEffect(() => {
+  //   handleStart();
+  // }, []);
+
   if (!Engine.instructionQueue) return <div>Loading</div>;
   return (
     <>
