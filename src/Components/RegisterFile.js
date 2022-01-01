@@ -14,9 +14,9 @@ const RegisterFile = ({ engine }) => {
   };
   return (
     <>
-      <h2>Register File</h2>
-      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
-        <div style={{ float: "right" }}>
+      <h2 className="text-center my-3">Register File</h2>
+      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2">
+        <div className="text-center my-3">
           <input
             placeholder="r10"
             onChange={(e) => {

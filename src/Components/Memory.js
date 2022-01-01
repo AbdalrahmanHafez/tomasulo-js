@@ -17,14 +17,16 @@ const Memory = () => {
     forceRerender({});
   };
 
+  
+
   if (Engine.allStations === undefined) {
     return <h1>error</h1>;
   } else {
     return (
       <>
-        <h2>Memory</h2>
-        <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
-          <div style={{ float: "right" }}>
+        <h2 className="text-center my-3">Memory</h2>
+        <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2 mb-5">
+          <div className="text-center my-3">
             <input
               placeholder="location"
               onChange={(e) => {
@@ -51,11 +53,11 @@ const Memory = () => {
               </tr>
             </thead>
             <tbody>
-              {/* for (let [key, value] of map) */}
+              
               {Engine.memory.forEach((value, key) => (
                 <tr key={key}>
                   <td>{key}</td>
-                  <td>{Engine.memory.get(key)}</td>
+                  <td>{value}</td>
                 </tr>
               ))}
             </tbody>

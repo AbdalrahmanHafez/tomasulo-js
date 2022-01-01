@@ -98,21 +98,21 @@ function App() {
       <div>
         <Row>
           <Col>
-            <h2>Input Instructions:</h2>
-            <textarea rows="10" cols="100" id="instructions"></textarea>
+            <h2 className="mx-3">Input Instructions:</h2>
+            <textarea className="mx-3" rows="10" cols="100" id="instructions"></textarea>
           </Col>
           <Col>
             <h2>Input latency:</h2>
             <Col>
-              <label>
+              <label className="mx-3">
                 {" "}
                 <b>ADD</b>
-              </label>{" "}
+              </label>{""}
               <input type="number" id="latADD" defaultValue={4} />
             </Col>
             <br />
             <Col>
-              <label>
+              <label className="mx-3">
                 <b>SUB</b>
               </label>{" "}
               <input type="number" id="latSUB" defaultValue={2} />
@@ -120,30 +120,30 @@ function App() {
             <br />
             <Col>
               <Col>
-                <label>
-                  <b>DIV</b>
-                </label>{" "}
-                <input type="number" id="latDIV" defaultValue={4} />
+                <label className="mx-3">
+                  <b>DIV</b>{""}
+                </label>
+                <input className="mx-2" type="number" id="latDIV" defaultValue={4} />
               </Col>
               <br />
-              <label>
+              <label className="mx-3">
                 <b>MUL</b>
-              </label>{" "}
-              <input type="number" id="latMUL" defaultValue={6} />
+              </label>{""}
+              <input className="ml-2" type="number" id="latMUL" defaultValue={6} />
             </Col>
             <br />
             <Col>
-              <label>
-                <b>LD</b>{" "}
-              </label>{" "}
+              <label className="mx-4">
+                <b>LD</b>
+              </label>{""}
               <input type="number" id="latLD" defaultValue={1} />
             </Col>
             <br />
             <Col>
-              <label>
+              <label className="mx-4">
                 <b>ST</b>
-              </label>{" "}
-              <input type="number" id="latST" defaultValue={2} />
+              </label>{""}
+              <input  type="number" id="latST" defaultValue={2} />
             </Col>
             <br />
           </Col>
@@ -154,7 +154,7 @@ function App() {
         <br />
 
         <button
-          className="btn btn-primary btn-lg"
+          className="btn btn-primary btn-lg mx-3"
           onClick={handleStart}
           disabled={isRunning}
         >

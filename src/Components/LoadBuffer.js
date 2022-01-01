@@ -9,8 +9,8 @@ const LoadBuffer = () => {
   else{
   return (
     <>
-    <h2>Load Buffer</h2>
-      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
+    <h2 className="text-center my-3">Load Buffer</h2>
+      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2">
 
         <table className="table table-bordered table-striped mb-0">
           <thead>

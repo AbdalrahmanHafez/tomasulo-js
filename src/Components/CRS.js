@@ -9,8 +9,8 @@ const CRS = ({ type,name}) => {
   else{
   return (
     <>
-    <h2>Reservation Station {name}</h2>
-      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive">
+    <h2 className="text-center my-3">Reservation Station {name}</h2>
+      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2">
       {/* <h4>statsions {JSON.stringify(Engine.allStations[type].stations[0])}</h4>  */}
 
         <table className="table table-bordered table-striped mb-0">

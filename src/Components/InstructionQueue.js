@@ -7,8 +7,9 @@ const InstructionQueue = ({ engine }) => {
 
   return (
     <>
-    <h2>Instruction Queue</h2>
-      <table className="table">
+    <h2 className="text-center my-1">Instruction Queue</h2>
+    <div className="col-8 offset-2">
+      <table className="table ">
         <thead>
           <tr>
             <th>Instruction</th>
@@ -32,6 +33,7 @@ const InstructionQueue = ({ engine }) => {
             ))}
         </tbody>
       </table>
+      </div>
     </>
   );
 };

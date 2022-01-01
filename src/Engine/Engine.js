@@ -29,6 +29,8 @@ class Engine {
     // "SUB R3, R2, R1",
     // "LD R4, 3(R1)",
     // "ST R5, 4(R2)",
+    Engine.memory.set(1,13);
+    Engine.memory.set(2,14);
     Engine.rawInstructions = rawInstructions;
     Engine.instructionQueue = rawInstructions.map((inst) => {
       const [op, rv1, rv2, rv3] = inst
