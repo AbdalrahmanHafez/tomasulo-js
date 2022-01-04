@@ -26,8 +26,9 @@ const Memory = () => {
     return (
       <>
         <h2 className="text-center my-3">Memory</h2>
-        <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2 mb-5">
-          <div className="text-center my-3">
+        <div
+        className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-10 offset-1 mb-5">
+          <div className="text-left my-3">
             <input
               placeholder="location"
               onChange={(e) => {

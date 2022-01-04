@@ -15,6 +15,7 @@ function App() {
   const newEngine = useRef(undefined);
   const [, forceRerender] = useState();
   const [isRunning, setIsRunning] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const [txtInstructions, setTxtInstructions] = useState(
     "LD R1, 3\nMUL R3, R1, R2\nADD R5, R3, R4\nADD R7, R2, R6\nADD R10, R8, R9\nMUL R11, R7, R10\nADD R5, R5, R11"
   );
@@ -29,6 +30,7 @@ function App() {
     let stillExcuting = newEngine.current.reactTick();
     if (!stillExcuting) {
       alert("Done");
+      setIsDone(true);
     }
     forceRerender({});
   };
@@ -164,7 +166,7 @@ function App() {
         <button
           className="btn btn-primary btn-lg mx-3"
           onClick={handleStart}
-          disabled={isRunning}
+          disabled={(isRunning || isDone)}
         >
           Start
         </button>
@@ -172,7 +174,7 @@ function App() {
         <button
           className="btn btn-primary btn-lg"
           onClick={handleClick}
-          disabled={!isRunning}
+          disabled={!isRunning || isDone}
         >
           Next Cycle
         </button>
@@ -182,18 +184,39 @@ function App() {
         <>
           <GlobalInfo />
           <br />
+         
           <InstructionQueue />
+         
           <br />
+          <Row>
+          <Col>
           <CRS name={"ADD/SUB"} type={"ADD"} />
+          </Col>
+          
           <br />
+          <Col>
           <CRS name={"MUL/DIV"} type={"MUL"} />
+          </Col>
+          </Row>
+          <Row>
+          <Col>
           <LoadBuffer />
+          </Col>
           <br />
+          <Col>
           <StoreBuffer />
+          </Col>
+          </Row>
           <br />
+          <Row>
+          <Col>
           <RegisterFile />
+          </Col>
           <br />
+          <Col>
           <Memory />
+          </Col>
+          </Row>
         </>
       )}
     </>
