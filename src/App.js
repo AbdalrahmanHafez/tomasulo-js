@@ -164,6 +164,7 @@ function App() {
       <div className="text-center">
         <br />
 
+
         <button
           className="btn btn-primary btn-lg mx-3"
           onClick={handleStart}
@@ -217,6 +218,12 @@ function App() {
           <Col>
           <Memory />
           </Col>
+          </Row>
+          <Row style={{marginLeft:"15cm"}}>
+            <h2><b>Contributors:</b></h2>
+            <h2>Youssef Alaa, Youssef Magdy</h2>
+            <h2>Mohamed Yehia, Abdelrahman Hafz</h2>
+            <h2>Mostafa Mohamed</h2>
           </Row>
         </>
       )}
