@@ -14,7 +14,7 @@ class Engine {
     // new Register("R3", 0),
     // new Register("R4", 0),
   ];
-  static cycles = 1;
+  static cycles = 1; ///0 
   static allStations;
   static bus = new Bus();
   static memory = new Map();
@@ -90,11 +90,6 @@ class Engine {
       Engine.issuedInstuctions.push(nextInstruction);
       Engine.instructionQueue.shift();
     }
-
-    // for each CRS write back, who willWriteBack
-    // Object.keys(Engine.allStations).forEach((crs) => {
-    //   crs.wbWhoWill();
-    // });
   }
 
   reactInitalize(rawInstructions, latencies) {

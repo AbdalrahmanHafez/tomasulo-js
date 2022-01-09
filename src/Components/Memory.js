@@ -13,7 +13,7 @@ const Memory = () => {
     if (isNaN(parseInt(updateMemValue)) || isNaN(parseInt(updateMemloc)))
       alert("invalid input");
 
-    Engine.memory.set(parseInt(updateMemloc), parseInt(updateMemValue));
+    Engine.memory.set(parseInt(updateMemloc), parseFloat(updateMemValue));
     console.log(Engine.memory);
     forceRerender({});
   };

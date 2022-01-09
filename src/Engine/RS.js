@@ -19,7 +19,7 @@ class RS {
     this.instruction = instruction;
     this.op = instruction.op;
 
-    // todo: based on Register File, fill v1, v2, q1, q2
+   
     this.busy = true;
     this.veryBusy = "True";
     const RegisterFile = Engine.RegisterFile;
@@ -122,7 +122,6 @@ class RS {
     }
   }
 
-  // TODO: when removing the RS, clear its' values and q
 }
 
 // module.exports = RS;
