@@ -10,7 +10,7 @@ const StoreBuffer = () => {
   return (
     <>
     <h2 className="text-center my-3">Store Buffer</h2>
-      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-8 offset-2">
+      <div className="table-wrapper-scroll-y my-custom-scrollbar table-responsive col-10 offset-1">
 
         <table className="table table-bordered table-striped mb-0">
           <thead>
