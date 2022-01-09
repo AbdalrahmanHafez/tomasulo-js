@@ -31,6 +31,7 @@ function App() {
     if (!stillExcuting) {
       alert("Done");
       setIsDone(true);
+      Engine.cycles--;
     }
     forceRerender({});
   };
